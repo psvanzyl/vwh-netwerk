@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
+// Opt-in sub-path support: empty for standalone/root deployments (unchanged),
+// set to e.g. "/dashboards/vrachtwagenheffing" at build time for the wegoze portal.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 const nextConfig = {
+  ...(basePath ? { basePath } : {}),
   async headers() {
     return [
       {

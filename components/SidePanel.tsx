@@ -84,7 +84,7 @@ export default function SidePanel({
     setCalcError(null);
 
     try {
-      const res = await fetch('/api/v1/toll-network/calculate', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/v1/toll-network/calculate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -539,7 +539,7 @@ function VehicleCard({
     setRdw(null);
 
     try {
-      const res = await fetch(`/api/v1/rdw/${encodeURIComponent(kenteken.trim())}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/v1/rdw/${encodeURIComponent(kenteken.trim())}`);
       if (!res.ok) {
         const data = await res.json().catch(() => null);
         throw new Error(data?.error || `Fout ${res.status}`);

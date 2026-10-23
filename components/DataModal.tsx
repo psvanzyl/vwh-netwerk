@@ -156,7 +156,7 @@ export default function DataModal({ open, onClose, data }: DataModalProps) {
             <ApiRow method="POST" path="/api/v1/toll-network/calculate" />
           </div>
           <a
-            href="/api/v1/docs"
+            href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/v1/docs`}
             className="inline-flex items-center gap-1 text-xs font-medium text-brand-700 hover:underline"
           >
             <ExternalLink className="w-3 h-3" />

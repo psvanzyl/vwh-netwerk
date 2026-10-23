@@ -33,6 +33,9 @@ export default function Home() {
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  // Portal sub-path support: empty for the standalone deployment, set at build
+  // time for the wegoze portal (e.g. "/dashboards/vrachtwagenheffing").
+  const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const [showAbout, setShowAbout] = useState(false);
   const [showData, setShowData] = useState(false);
 
@@ -43,7 +46,7 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    fetch('/data/toll-network.geojson')
+    fetch(`${BASE_PATH}/data/toll-network.geojson`)
       .then(async (res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -109,7 +112,7 @@ export default function Home() {
               Data
             </button>
             <Link
-              href="/api/v1/docs"
+              href={`${BASE_PATH}/api/v1/docs`}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
             >
               <Code2 className="w-3.5 h-3.5" />
@@ -136,7 +139,7 @@ export default function Home() {
               Data downloaden
             </button>
             <Link
-              href="/api/v1/docs"
+              href={`${BASE_PATH}/api/v1/docs`}
               onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg"
             >

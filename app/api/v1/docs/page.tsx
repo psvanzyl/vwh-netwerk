@@ -206,7 +206,7 @@ export default function ApiDocsPage() {
     <div className="min-h-screen bg-white">
       <div className="border-b border-gray-200 px-4 py-3 flex items-center gap-3">
         <Link
-          href="/"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`}
           className="text-brand-700 hover:text-brand-800 text-sm flex items-center gap-1"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -215,7 +215,7 @@ export default function ApiDocsPage() {
         <h1 className="text-lg font-bold text-gray-900">API Documentatie</h1>
         <span className="text-xs text-gray-400">OpenAPI 3.0</span>
         <a
-          href="/api/v1/openapi"
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/api/v1/openapi`}
           target="_blank"
           className="ml-auto text-xs text-brand-600 hover:underline"
         >

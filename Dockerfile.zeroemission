@@ -1,0 +1,32 @@
+# wegoze portal deployment (sub-path: /dashboards/vrachtwagenheffing)
+# Self-contained copy of ./Dockerfile with the base path baked in at build time.
+# The standalone deployment keeps using ./Dockerfile and is unaffected.
+#
+# NEXT_PUBLIC_BASE_PATH is inlined at build time (Next.js), so every asset and
+# data URL becomes /dashboards/vrachtwagenheffing/... . `next start` re-reads next.config.mjs at runtime,
+# so the variable must be present there too.
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_BASE_PATH=/dashboards/vrachtwagenheffing
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_BASE_PATH=/dashboards/vrachtwagenheffing
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.mjs ./next.config.mjs
+EXPOSE 3000
+CMD ["npm", "run", "start"]
