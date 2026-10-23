@@ -206,7 +206,7 @@ export default function ApiDocsPage() {
     <div className="min-h-screen bg-white">
       <div className="border-b border-gray-200 px-4 py-3 flex items-center gap-3">
         <Link
-          href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/`}
+          href="/"
           className="text-brand-700 hover:text-brand-800 text-sm flex items-center gap-1"
         >
           <ArrowLeft className="w-4 h-4" />

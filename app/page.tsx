@@ -112,7 +112,7 @@ export default function Home() {
               Data
             </button>
             <Link
-              href={`${BASE_PATH}/api/v1/docs`}
+              href="/api/v1/docs"
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition"
             >
               <Code2 className="w-3.5 h-3.5" />
@@ -139,7 +139,7 @@ export default function Home() {
               Data downloaden
             </button>
             <Link
-              href={`${BASE_PATH}/api/v1/docs`}
+              href="/api/v1/docs"
               onClick={() => setMobileMenuOpen(false)}
               className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-gray-700 hover:bg-gray-100 rounded-lg"
             >
